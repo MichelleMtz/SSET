@@ -1,0 +1,162 @@
+
+            <div class="row">
+                <div class="col-12 bg-secondary border border-dark text-center">HABITOS DE ESTUDIO</div>
+                <div class="col-4 border border-dark"><p>Tiempo dedicado a estudiar diariamente fuera de clase:</p></div>
+                <div class="col-2 border border-dark">
+                    <p>
+                        @if ($datos[3]->tiempo_empelado_estudiar==1)
+                            Menos de 1 hora
+                        @endif
+                        @if ($datos[3]->tiempo_empelado_estudiar>1 && $datos[3]->tiempo_empelado_estudiar<5)
+                            {{$datos[3]->tiempo_empelado_estudiar}} horas
+                        @endif
+                        @if ($datos[3]->tiempo_empelado_estudiar==5)
+                            Mas de 4 horas
+                        @endif
+
+                    </p>
+                </div>
+                <div class="col-4 border border-dark"><p>¿Cómo es tú forma de trabajo intelectual?</p></div>
+                <div class="col-2 border border-dark">
+                    <p>
+                        @if ($datos[3]->id_forma_trabajo==1)
+                            Muy Rapido
+                        @endif
+                        @if ($datos[3]->id_forma_trabajo==2)
+                             Rapido
+                        @endif
+                        @if ($datos[3]->id_forma_trabajo==3)
+                            Regular
+                        @endif
+                        @if ($datos[3]->id_forma_trabajo==4)
+                            Lento
+                        @endif
+                        @if ($datos[3]->id_forma_trabajo==5)
+                            Muy Lento
+                        @endif
+
+                    </p>
+                </div>
+
+                <div class="col-3 border border-dark"><p>Tu forma de estudio mas utilizada:</p></div>
+                <div class="col-9 border border-dark"><p>{{$datos[3]->forma_estudio}}</p></div>
+
+                <div class="col-3 border border-dark"><p>¿Cómo empleas tu tiempo libre?</p></div>
+                <div class="col-9 border border-dark"><p>{{$datos[3]->tiempo_libre}}</p></div>
+
+                <div class="col-3 border border-dark"><p>Asignaturas preferidas :</p></div>
+                <div class="col-9 border border-dark"><p>{{$datos[3]->asignatura_preferida}}</p></div>
+
+                <div class="col-2 border border-dark"><p>¿Por qué?</p></div>
+                <div class="col-10 border border-dark"><p>{{$datos[3]->porque_asignatura}}</p></div>
+
+                <div class="col-4 border border-dark"><p>Asignaturas que te han sido difíciles: </p></div>
+                <div class="col-8 border border-dark"><p>{{$datos[3]->asignatura_dificil}}</p></div>
+
+                <div class="col-2 border border-dark"><p>¿Por qué?:</p></div>
+                <div class="col-10 border border-dark"><p>{{$datos[3]->porque_asignatura_dificil}}</p></div>
+
+                <div class="col-5 border border-dark"><p>¿Qué opinión tienes de ti mismo como estudiante?</p></div>
+                <div class="col-1 border border-dark"><p>{{$datos[3]->opinion_tu_mismo_estudiante}}</p></div>
+
+
+                <div class="col-12 bg-secondary border border-dark text-center">FORMACION INTEGRAL/SALUD </div>
+                <div class="col-5 border border-dark"><p>¿Practicas regularmente algún deporte?:</p></div>
+                <div class="col-1 border border-dark"><p>{{$datos[4]->practica_deporte==1?'Si':'No'}}</p></div>
+                <div class="col-2 border border-dark"><p>Especificar:</p></div>
+                <div class="col-4 border border-dark"><p>{{$datos[4]->especifica_deporte}}</p></div>
+
+                <div class="col-5 border border-dark"><p>¿Practicas alguna actividad artística?:</p></div>
+                <div class="col-1 border border-dark"><p>{{$datos[4]->practica_artistica==1?'Si':'No'}}</p></div>
+                <div class="col-2 border border-dark"><p>Especificar:</p></div>
+                <div class="col-4 border border-dark"><p>{{$datos[4]->especifica_artistica}}</p></div>
+
+                <div class="col-5 border border-dark"><p>Tu pasatiempo favorito:</p></div>
+                <div class="col-7 border border-dark"><p>{{$datos[4]->pasatiempo}}</p></div>
+
+                <div class="col-5 border border-dark"><p>¿Participas en actividades culturales, sociales?:</p></div>
+                <div class="col-1 border border-dark"><p>{{$datos[4]->actividades_culturales==1?'Si':'No'}}</p></div>
+                <div class="col-1 border border-dark"><p>¿Cuáles?:</p></div>
+                <div class="col-5 border border-dark"><p>{{$datos[4]->cuales_act}}</p></div>
+
+                <div class="col-5 border border-dark"><p>¿Cómo consideras tu estado de salud?:</p></div>
+                <div class="col-1 border border-dark">
+                    <p>
+                            {{$escalas[$datos[4]->estado_salud-1]->desc_escala}}
+                    </p>
+                </div>
+                <div class="col-5 border border-dark"><p>¿Padeces alguna enfermedad crónica?:</p></div>
+                <div class="col-1 border border-dark"><p>{{$datos[4]->enfermedad_cronica==1?'Si':'No'}}</p></div>
+
+                <div class="col-1 border border-dark"><p>Especificar:</p></div>
+                <div class="col-5 border border-dark"><p>{{$datos[4]->especifica_enf_cron}}</p></div>
+                <div class="col-5 border border-dark"><p>¿Tus padres padecen alguna enfermedad crónica?:</p></div>
+                <div class="col-1 border border-dark"><p>{{$datos[4]->enf_cron_padre==1?'Si':'No'}}</p></div>
+
+                <div class="col-1 border border-dark"><p>Especificar:</p></div>
+                <div class="col-5 border border-dark"><p>{{$datos[4]->especifica_enf_cron_padres}}</p></div>
+                <div class="col-5 border border-dark"><p>¿Te han realizado alguna operación médico-quirúrgica?:</p></div>
+                <div class="col-1 border border-dark"><p>{{$datos[4]->operacion==1?'Si':'No'}}</p></div>
+
+                <div class="col-2 border border-dark"><p>¿De qué?:</p></div>
+                <div class="col-4 border border-dark"><p>{{$datos[4]->deque_operacion}}</p></div>
+                <div class="col-5 border border-dark"><p>¿Padeces alguna enfermedad visual?:</p></div>
+                <div class="col-1 border border-dark"><p>{{$datos[4]->enfer_visual==1?'Si':'No'}}</p></div>
+
+                <div class="col-8 border border-dark"><p>¿Usas lentes?:</p></div>
+                <div class="col-4 border border-dark"><p>{{$datos[4]->usas_lentes==1?'Si':'No'}}</p></div>
+
+
+                <div class="col-2 border border-dark"><p>Especificar:</p></div>
+                <div class="col-4 border border-dark"><p>{{$datos[4]->especifica_enf}}</p></div>
+                <div class="col-5 border border-dark"><p>¿Tomas medicamento controlado?:</p></div>
+                <div class="col-1 border border-dark"><p>{{$datos[4]->medicamento_controlado==1?'Si':'No'}}</p></div>
+
+                <div class="col-2 border border-dark"><p>Especificar:</p></div>
+                <div class="col-4 border border-dark"><p>{{$datos[4]->especifica_medicamento}}</p></div>
+                <div class="col-1 border border-dark"><p>Estatura:</p></div>
+                <div class="col-2 border border-dark"><p>{{$datos[4]->estatura}}</p></div>
+                <div class="col-1 border border-dark"><p>Peso:</p></div>
+                <div class="col-2 border border-dark"><p>{{$datos[4]->peso}}</p></div>
+
+                <div class="col-4 border border-dark"><p>¿Haz tenido algún accidente grave?:</p></div>
+                <div class="col-1 border border-dark"><p>{{$datos[4]->accidente_grave==1?'Si':'No'}}</p></div>
+                <div class="col-2 border border-dark"><p>Relata Brevemente:</p></div>
+                <div class="col-5 border border-dark"><p>{{$datos[4]->relata_breve}}</p></div>
+
+                <div class="col-12 bg-secondary border border-dark text-center">ÁREA PSICOPEDAGÓGICA (CONOCIMIENTOS Y HABILIDADES)</div>
+
+                <div class="col-2 border border-dark"><p>Rendimiento Escolar:</p></div>
+                <div class="col-1 border border-dark"><p>{{$escalas[$datos[5]->rendimiento_escolar-1]->desc_escala}}</p></div>
+                <div class="col-2 border border-dark"><p>Dominio del propio idioma:</p></div>
+                <div class="col-1 border border-dark"><p>{{$escalas[$datos[5]->dominio_idioma-1]->desc_escala}}</p></div>
+                <div class="col-2 border border-dark"><p>Otro idioma:</p></div>
+                <div class="col-1 border border-dark"><p>{{$escalas[$datos[5]->otro_idioma-1]->desc_escala}}</p></div>
+                <div class="col-2 border border-dark"><p>Conocimentos en cómputo:</p></div>
+                <div class="col-1 border border-dark"><p>{{$escalas[$datos[5]->conocimiento_compu-1]->desc_escala}}</p></div>
+
+                <div class="col-3 border border-dark"><p>Aptitudes Especiales:</p></div>
+                <div class="col-1 border border-dark"><p>{{$escalas[$datos[5]->aptitud_especial-1]->desc_escala}}</p></div>
+                <div class="col-3 border border-dark"><p>Comprensión y Retención en clase:</p></div>
+                <div class="col-1 border border-dark"><p>{{$escalas[$datos[5]->comprension-1]->desc_escala}}</p></div>
+                <div class="col-3 border border-dark"><p>Preparación y presentación de exámenes:</p></div>
+                <div class="col-1 border border-dark"><p>{{$escalas[$datos[5]->preparacion-1]->desc_escala}}</p></div>
+
+                <div class="col-5 border border-dark"><p>Aplicación de estrategias de aprendizaje y estudio:</p></div>
+                <div class="col-1 border border-dark"><p>{{$escalas[$datos[5]->estrategias_aprendizaje-1]->desc_escala}}</p></div>
+                <div class="col-5 border border-dark"><p>Organización en actividades de estudio:</p></div>
+                <div class="col-1 border border-dark"><p>{{$escalas[$datos[5]->organizacion_actividades-1]->desc_escala}}</p></div>
+
+                <div class="col-5 border border-dark"><p>Concentración durante el estudio:</p></div>
+                <div class="col-1 border border-dark"><p>{{$escalas[$datos[5]->concentracion-1]->desc_escala}}</p></div>
+                <div class="col-5 border border-dark"><p>Solución de problemas y aprendizaje de las matemáticas:</p></div>
+                <div class="col-1 border border-dark"><p>{{$escalas[$datos[5]->solucion_problemas-1]->desc_escala}}</p></div>
+
+                <div class="col-3 border border-dark"><p>Condiciones ambientales durante el estudio:</p></div>
+                <div class="col-1 border border-dark"><p>{{$escalas[$datos[5]->condiciones_ambientales-1]->desc_escala}}</p></div>
+                <div class="col-4 border border-dark"><p>Búsqueda bibliografica e integración de información:</p></div>
+                <div class="col-1 border border-dark"><p>{{$escalas[$datos[5]->busqueda_bibliografica-1]->desc_escala}}</p></div>
+                <div class="col-2 border border-dark"><p>Trabajo en equipo:</p></div>
+                <div class="col-1 border border-dark"><p>{{$escalas[$datos[5]->trabajo_equipo-1]->desc_escala}}</p></div>
+            </div>
+          </div>
