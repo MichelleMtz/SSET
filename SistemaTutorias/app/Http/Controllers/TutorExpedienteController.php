@@ -27,6 +27,13 @@ class TutorExpedienteController extends Controller
         $periodos= DB::table('gnral_periodos')->get();
 
         //return $datos;
-        return view('alumnos.expediente')->with(compact('carreras','grupos','periodos','datos'));
+
+
+        $dato=[$carreras,$grupos,$periodos,$datos];
+
+
+        return redirect('vista');
+
+
     }
 }
