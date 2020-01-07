@@ -27,7 +27,7 @@
                         <div class="col-12">
                             <div class="row pb-2">
                                 <div class="col-11"></div>
-                                <div class="col-1"><a href="#!"  class="btn text-white btn-danger" ><i class="fas fa-file-pdf"></i></a></div>
+                                <a href="{{route('pdf_lista')}}" target="_blank" class="btn btn-danger text-white float-right"> <i class="fas fa-file-pdf"></i></a>
                             </div>
                         </div>
                     </div>
