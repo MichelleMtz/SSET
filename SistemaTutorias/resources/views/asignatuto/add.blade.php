@@ -34,7 +34,7 @@
                             <tbody>
                             <tr>
                                 <th id='' >@{{ nameP }}</th>
-                                <th id='valG'></th>
+                                <th id=''>@{{ generaciong }}</th>
                             </tr>
                             </tbody>
                         </table>

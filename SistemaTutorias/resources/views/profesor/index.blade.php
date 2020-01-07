@@ -19,7 +19,6 @@
     </div>
     <div class="row" v-show="menu==true">
         <div class="col-12">
-
             <div class="card">
                 <div class="card-header">
                 </div>
