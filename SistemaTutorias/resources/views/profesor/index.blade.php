@@ -21,12 +21,6 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="row">
-                        <div class="col-10 text-center font-weight-bold">@{{ carrera }}</div>
-                        <div class="col-1"><button class="btn text-white btn-success" @click="getAlumnos()" ><i class="fas fa-list"></i></button></div>
-                        <div class="col-1"><button class="btn text-white btn-primary" @click="graficagenero()" ><i class="fas fa-chart-pie"></i></button></div>
-                    </div>
-                    <div class="row"><div class="col-10 text-center">@{{ gen }}</div></div>
                 </div>
                 <div class="card-body" v-show="lista==true" >
                     <div class="row">

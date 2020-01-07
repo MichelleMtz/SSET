@@ -7,9 +7,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 class Profesor extends Model
 {
-
-
-
     public static function getAllGen(){
         $carrera=DB::select('SELECT * FROM datos_personales where id_user='.Auth::user()->id);
         $datos=DB::select('SELECT count(alumnos.id_alumno) cantidad, CASE alumnos.id_genero WHEN 1 THEN "Hombres" WHEN 2 THEN "Mujeres" END gen
@@ -33,5 +30,5 @@ class Profesor extends Model
         return $datos;
     }
 
-    //
+
 }

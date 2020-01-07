@@ -164,3 +164,5 @@ Route::post('/ftp/Up', 'FtpController@upload');
 {
     Route::get('/prueba2','Prueba2Controller@prueba');
 }
+Route::get("pdf/all","PdfController@pdf_all")->name("pdf_all");
+Route::get("pdf/lista","PdfController@pdf_lista")->name("pdf_lista");

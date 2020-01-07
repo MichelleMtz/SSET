@@ -30,7 +30,7 @@ class ViewAlumnosController extends Controller
         //dd($carreras);
         //dd($grupos);
         //dd($periodos);
-
+        return view('alumnos.expediente')->with(compact('carreras','grupos','periodos','datos'));
     }
 
     /**
