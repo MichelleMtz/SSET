@@ -935,14 +935,13 @@ class PdfController extends Controller
 
 
 
-    public function pdf_lista()
+    public function pdf_lista(Request $request)
     {
 
-        $datos=DB::select('SELECT gnral_alumnos.*, exp_asigna_alumnos.estado,exp_asigna_alumnos.id_asigna_alumno
-                from gnral_alumnos JOIN exp_asigna_alumnos ON exp_asigna_alumnos.id_alumno=gnral_alumnos.id_alumno
-                where exp_asigna_alumnos.id_asigna_generacion=(SELECT exp_asigna_tutor.id_asigna_generacion
-                FROM exp_asigna_tutor JOIN gnral_personales on gnral_personales.id_personal=exp_asigna_tutor.id_personal
-                WHERE gnral_personales.tipo_usuario='.Auth::user()->id.') order by(gnral_alumnos.apaterno)');
+        $datos=(DB::select('SELECT gnral_alumnos.*, exp_asigna_alumnos.estado,exp_asigna_alumnos.id_asigna_alumno
+                 from gnral_alumnos JOIN exp_asigna_alumnos ON exp_asigna_alumnos.id_alumno=gnral_alumnos.id_alumno 
+                 where exp_asigna_alumnos.id_asigna_generacion='.$request->id_asigna_generacion.' and 
+                 gnral_alumnos.id_carrera='.$request->id_carrera.' order by(gnral_alumnos.apaterno)'));
         //dd($datos);
         $us=Auth::user()->id;
         $profesor=DB::select('SELECT gnral_personales.* FROM gnral_personales WHERE gnral_personales.tipo_usuario='.Auth::user()->id);
@@ -1057,11 +1056,10 @@ class PdfController extends Controller
         $pdf->Cell(($pdf->GetPageWidth()),3,"". utf8_decode(mb_strtoupper("________________________________________________")),0,1,"C");
         $pdf->Cell(($pdf->GetPageWidth()),3,"". utf8_decode(mb_strtoupper($profesor[0]->nombre)),0,0,"C");
 
-
-
-
         $pdf->Output();
         exit();
+
+
 
     }
 

@@ -21,13 +21,20 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
+                    <div class="row">
+                        <div class="col-10 text-center font-weight-bold">@{{ carrera }}</div>
+                        <div class="col-1"><button class="btn text-white btn-success" @click="getAlumnos()" ><i class="fas fa-list"></i></button></div>
+                        <div class="col-1"><button class="btn text-white btn-primary" @click="graficagenero()" ><i class="fas fa-chart-pie"></i></button></div>
+
+                    </div>
+                    <div class="row"><div class="col-10 text-center">@{{ gen }}</div></div>
                 </div>
                 <div class="card-body" v-show="lista==true" >
                     <div class="row">
                         <div class="col-12">
                             <div class="row pb-2">
                                 <div class="col-11"></div>
-                                <a href="{{route('pdf_lista')}}" target="_blank" class="btn btn-danger text-white float-right"> <i class="fas fa-file-pdf"></i></a>
+                                <a @click="pdf()" target="_blank" class="btn btn-danger text-white float-right"> <i class="fas fa-file-pdf"></i></a>
                             </div>
                         </div>
                     </div>
@@ -129,6 +136,7 @@
             cambios:'/cambio',
             estadociv:'graphics/estadocivil',
             rutgen:"/graphics/genero",
+            pd:"pdf/lista",
             datos:[],
             grupos:[],
             alumnog:[],
@@ -265,6 +273,21 @@
             },
             ver:function (alumno) {
                 axios.post(this.act,{id_alumno:alumno.id_alumno}).then(response=>{
+
+                });
+            },
+            pdf:function () {
+                axios.post(this.pd,{id_asigna_generacion:this.idasigna,id_carrera:this.idca},{
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/pdf'
+                    },
+                    responseType: "blob"
+                }).then(response=>{
+                    console.log(response.data);
+                    const blob = new Blob([response.data], { type: 'application/pdf' });
+                    const objectUrl = URL.createObjectURL(blob);
+                    window.open(objectUrl)
 
                 });
             }
