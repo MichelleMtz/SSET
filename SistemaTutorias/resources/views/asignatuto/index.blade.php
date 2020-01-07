@@ -36,11 +36,10 @@
                                         <th>Tutor</th>
                                         <th>Grupo</th>
                                     </thead>
-                                    <tbody id="inser-vis">
-                                        <tr>
-                                            <td>@{{ name }}</td>
-                                        </tr>
+                                    <tbody id="datostut">
+
                                     </tbody>
+
                                 </table>
                             </div>
                         </div>
@@ -57,7 +56,7 @@
                     </div>
                 </div>
             </div>
-       <pre> @{{ $data }}</pre>
+
         @include('asignatuto.add');
 
     </div>
@@ -87,6 +86,7 @@
                 code:"",
                 dat:"",
                 valida:false,
+                generaciong:"",
             },
             methods:{
                 getDatos:function () {
@@ -100,7 +100,6 @@
                 funclick:function (profesor) {
                     this.nameP= profesor.nombre;
                     this.idP= profesor.id_personal;
-                    $('#val').html('<th data-id="'+this.idname+'" id="asig" scope="row">'+this.name+'</th>');
                     $('#btnAsigCoo').show();
                 },
                 borrar:function () {
@@ -113,8 +112,10 @@
                     this.grup=genera.grupo;
                     this.gen=genera.generacion;
                     this.idgene=genera.id_asigna_generacion;
-                    $('#valG').html('<th data-id="'+this.idgene+'" id="asig" scope="row">'+this.gen+' grupo: '+this.grup+'</th>');
 
+                    //$('#valG').html('<th data-id="'+this.idgene+'" id="asig" scope="row">'+this.gen+' grupo: '+this.grup+'</th>');
+
+                    this.generaciong=this.gen+" grupo: "+this.grup;
                     this.conG=true;
                     if (this.conP && this.conG) {
                         $('#btnAsigCoo').show();
@@ -125,7 +126,7 @@
                 profesores:function (profesor) {
                     this.nameP=profesor.nombre;
                     this.idP=profesor.id_personal;
-
+                    this.conP=true;
                 },
                 addprev:function () {
                     //alert();
@@ -134,12 +135,14 @@
                     this.cat+=this.idP+","+this.idgene+",";
                     this.code+="<tr><th>"+this.nameP+"</th><th>"+this.gen+" grupo: "+this.grup+"</th></tr>";
 
+                    $('#datostut').html(this.code);
+
                     $('#btnGuardar').show();
                     $('#btnCancelar').show();
                     //$('#prof'+idP).fadeOut();
                     $('#btnAsigCoo').hide();
-                    $('#valP').html('');
-                    $('#valG').html('');
+                    this.nameP="";
+                    this.generaciong="";
                     this.dat=this.cat;
                     this.valida=true;
                     //$('#arr').val(this.cat);
@@ -147,11 +150,13 @@
                 guardar:function () {
                     axios.post(this.tut,{da:this.dat}).then(response=>{
                         this.valida=false;
+                        $('#btnGuardar').hide();
+                        $('#btnCancelar').hide();
                     });
                 },
                 cancel:function () {
                   this.dat="";
-                    $('#inser-vis').html("");
+                    $('#datostut').html("");
                     $('#btnGuardar').hide();
                     $('#btnCancelar').hide();
                     //$('#prof'+idP).fadeOut();
