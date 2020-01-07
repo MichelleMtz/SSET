@@ -1,23 +1,23 @@
-@extends('layouts.app')
-@section('content')
-@if (Session::has('cuenta') || Session::has('id_alumno'))
+
+
 <div class="container">
     <div class="row">
             <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
             <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
             <div class="container card">
                 <br>
-                    <div class="row">
-                        <div class="col-3">
-                            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                <a class="nav-link active" id="v-pills-general-tab" data-toggle="pill" href="#v-pills-general" role="tab" aria-controls="v-pills-general" aria-selected="true">Datos Generales</a>
-                                <a class="nav-link" id="v-pills-antecedentes-tab" data-toggle="pill" href="#v-pills-antecedentes" role="tab" aria-controls="v-pills-antecedentes" aria-selected="false">Antecedentes Acádemicos</a>
-                                <a class="nav-link" id="v-pills-familiares-tab" data-toggle="pill" href="#v-pills-familiares" role="tab" aria-controls="v-pills-familiares" aria-selected="false">Datos Familiares</a>
-                                <a class="nav-link" id="v-pills-habitos-tab" data-toggle="pill" href="#v-pills-habitos" role="tab" aria-controls="v-pills-habitos" aria-selected="false">Hábitos de Estudio</a>
-                                <a class="nav-link" id="v-pills-formacion-tab" data-toggle="pill" href="#v-pills-formacion" role="tab" aria-controls="v-pills-formacion" aria-selected="false">Formación Integral/Salud</a>
-                                <a class="nav-link" id="v-pills-area-tab" data-toggle="pill" href="#v-pills-area" role="tab" aria-controls="v-pills-area" aria-selected="false">Área Psicopedagógica</a>
-                            </div>
+                <div class="row">
+                    <div class="col-12 pt-4">
+                        <div class="nav  nav-tabs" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                            <a class="nav-link active" id="v-pills-general-tab" data-toggle="pill" href="#v-pills-general" role="tab" aria-controls="v-pills-general" aria-selected="true">Datos Generales</a>
+                            <a class="nav-link disabled" id="v-pills-antecedentes-tab" data-toggle="pill" href="#v-pills-antecedentes" role="tab" aria-controls="v-pills-antecedentes" aria-selected="false">Antecedentes Acádemicos</a>
+                            <a class="nav-link disabled" id="v-pills-familiares-tab" data-toggle="pill" href="#v-pills-familiares" role="tab" aria-controls="v-pills-familiares" aria-selected="false">Datos Familiares</a>
+                            <a class="nav-link disabled" id="v-pills-habitos-tab" data-toggle="pill" href="#v-pills-habitos" role="tab" aria-controls="v-pills-habitos" aria-selected="false">Hábitos de Estudio</a>
+                            <a class="nav-link disabled" id="v-pills-formacion-tab" data-toggle="pill" href="#v-pills-formacion" role="tab" aria-controls="v-pills-formacion" aria-selected="false">Formación Integral/Salud</a>
+                            <a class="nav-link disabled" id="v-pills-area-tab" data-toggle="pill" href="#v-pills-area" role="tab" aria-controls="v-pills-area" aria-selected="false">Área Psicopedagógica</a>
                         </div>
+                    </div>
+                </div>
                         <div class="col-9">
                             <form id="form-expe">
                                 {{ csrf_field() }}
@@ -31,27 +31,21 @@
                                                         <label for="carrera">Carrera</label>
                                                         <select name="carrera" id="carrera" class="custom-select custom-select-md">
                                                             <option value="">Elija una Carrera</option>
-                                                            @foreach ($carreras as $dato)
-                                                            <option value="{{$dato->id_carrera}}" >{{$dato->desc_carrera}}</option>
-                                                            @endforeach
+
                                                          </select>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="periodo">Periodo</label>
                                                     <select name="periodo" id="periodo" class="custom-select custom-select-md">
                                                         <option value="" selected>Elija un Periodo</option>
-                                                        @foreach ($periodos as $dato)
-                                                            <option value="{{$dato->id_periodo}}" >{{$dato->desc_periodo}}</option>
-                                                        @endforeach
+
                                                     </select>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="grupo">Grupo</label>
                                                     <select name="grupo" id="grupo" class="custom-select custom-select-md">
                                                         <option value="" selected>Elija un Grupo</option>
-                                                        @foreach ($grupos as $dato)
-                                                            <option value="{{$dato->id_grupo}}" >{{$dato->desc_grupo}}</option>
-                                                            @endforeach
+
                                                     </select>
                                                 </div>
                                             </div>
@@ -877,76 +871,7 @@
                             </div>
                         </form>
                         </div>
-                    </div>
             </div>
     </div>
 </div>
-@else
-    Pagina No disponible
-@endif
-@endsection
-<script src="{{asset('js/jquery.js')}}"></script>
-<script>
-$(document).ready(function () {
-    $('#siguiente1').click(function(){
-        $('#v-pills-general-tab').removeClass('active');
-        $('#v-pills-antecedentes-tab').addClass('active');
-        $('#v-pills-general').removeClass('show active');
-        $('#v-pills-antecedentes').addClass('show active');
-        //alert('das');\
-        //$('#v-pills-general-tab').tab('show')
-    });
-    $('#siguiente2').click(function(){
-        $('#v-pills-antecedentes-tab').removeClass('active');
-        $('#v-pills-familiares-tab').addClass('active');
-        $('#v-pills-antecedentes').removeClass('show active');
-        $('#v-pills-familiares').addClass('show active');
-        //alert('das');\
-        //$('#v-pills-general-tab').tab('show')
-    });
-    $('#siguiente3').click(function(){
-        $('#v-pills-familiares-tab').removeClass('active');
-        $('#v-pills-habitos-tab').addClass('active');
-        $('#v-pills-familiares').removeClass('show active');
-        $('#v-pills-habitos').addClass('show active');
-        //alert('das');\
-        //$('#v-pills-general-tab').tab('show')
-    });
-    $('#siguiente4').click(function(){
-        $('#v-pills-habitos-tab').removeClass('active');
-        $('#v-pills-formacion-tab').addClass('active'));
-        $('#v-pills-habitos').removeClass('show active');
-        $('#v-pills-formacion').addClass('show active');
-        //alert('das');\
-        //$('#v-pills-general-tab').tab('show')
-    });
-    $('#siguiente5').click(function(){
-        $('#v-pills-formacion-tab').removeClass('active');
-        $('#v-pills-area-tab').addClass('active');
-        $('#v-pills-formacion').removeClass('show active');
-        $('#v-pills-area').addClass('show active');
-        //alert('das');\
-        //$('#v-pills-general-tab').tab('show')
-    });
-    $('#final').click(function(){
-        var datos = $('#form-expe').serialize();
-        $.ajax({
-        headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-        url: "Alum",
-        method: "POST",
-        dataType: "json",
-        data:datos,
 
-    });
-        //var datos = $('#exp').serialize();
-        //console.log(datos);
-    });
-    $( "#fn" ).datepicker({
-      changeYear: true
-    });
-
-});
-
-</script>

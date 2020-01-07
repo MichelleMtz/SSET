@@ -11,6 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{asset('js/highcharts.js')}}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -19,6 +20,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/estilo.css') }}" rel="stylesheet">
 </head>
 @section('header')
 @include('partials.head')
@@ -97,13 +99,7 @@
                             @endif
                             @if (Auth::user()->tipo_usuario ==2 && !Session::get('jefe'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="profesor">Inicio</a>
-                                </li>
-                                <li class="nav-item">
-                                        <a class="nav-link" href="graficas">Estadisticas</a>
-                                    </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="tutorados">Tutorados</a>
+                                    <a class="nav-link" href="tutorvista">Inicio</a>
                                 </li>
                                 @if (Session::get('coordinador'))
                                 <li class="nav-item">

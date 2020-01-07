@@ -87,14 +87,31 @@ Auth::routes();
 
 }
 
+Route::get('/vista', function () {
+    return view('hola');
+});
+
+Route::group(['prefix'=>'graphics'],function (){
+    Route::get('/', 'GraficasController@index');
+    Route::post('genero', 'GraficasController@genero');
+    Route::post('estadocivil', 'GraficasController@estadocivil');
+
+});
+
+
 {
     Route::Resource('/graficas','GraficasController');
+
     Route::get('/getAllDatos','GraficasController@getAll');
 
 }
 
 {
-    Route::Resource('/profesor','ProfesorController');
+    Route::post('/profesor','ProfesorController@alumnos');
+    Route::post('/cambio','ProfesorController@cambio');
+    Route::get('grupos','ProfesorController@grupos');
+
+    Route::post('/alu','ProfesorController@alumnos');
     Route::post('/uE','ProfesorController@updateEstado');
     Route::get('/getAll','ProfesorController@getAll');
     Route::get('/setAlumnId','ProfesorController@setAlumnoId');
