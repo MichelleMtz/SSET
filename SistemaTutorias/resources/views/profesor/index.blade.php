@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-header">
                     Tutorados
-                    <a href="pdf" target="_blank" id="pdf" class="btn text-white btn-danger float-right" ><i class="fas fa-file-pdf"></i></a>
+                    <a href="{{route('pdf_lista')}}" target="_blank" class="btn btn-danger text-white float-right"> <i class="fas fa-file-pdf"></i></a>
                 </div>
                 <div class="card-body row" >
                     <table class="table table-bordered table-sm">

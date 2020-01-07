@@ -45,7 +45,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <img src="{{asset('imagenes/ff.jpg')}}" class=" rounded center"  width="90em" height="80em">
+                                    <img src="{{asset('img/ff.jpg')}}" class=" rounded center"  width="90em" height="80em">
 
                         </div>
                         <div class="row border border-dark sizeF text-uppercase text-center">

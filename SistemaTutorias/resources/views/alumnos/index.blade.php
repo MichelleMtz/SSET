@@ -10,7 +10,7 @@
             <div class="card-header">
                 {{Session::get('alumno')}}
                 @if ($datos)
-                <a href="expPdf/alumno" target="_blank" class="btn btn-danger text-white float-right"> <i class="fas fa-file-pdf"></i></a>
+                    <a href="{{route('pdf_all')}}" target="_blank" class="btn btn-danger text-white float-right"> <i class="fas fa-file-pdf"></i></a>
                 @endif
             </div>
             <div class="card-body">
