@@ -130,7 +130,7 @@
                 },
                 addprev:function () {
                     //alert();
-
+//////alert
                     $('#'+this.idgene).toggle();
                     this.cat+=this.idP+","+this.idgene+",";
                     this.code+="<tr><th>"+this.nameP+"</th><th>"+this.gen+" grupo: "+this.grup+"</th></tr>";
