@@ -16,6 +16,7 @@ class PanelAlumnoController extends Controller
     {
         //
         $datos=AsignaExpediente::getDatos();
+        //dd($datos);
         return view('alumnos.index')->with(compact('datos'));
 
     }

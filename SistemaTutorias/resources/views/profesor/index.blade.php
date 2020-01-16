@@ -25,7 +25,6 @@
                         <div class="col-10 text-center font-weight-bold">@{{ carrera }}</div>
                         <div class="col-1"><button class="btn text-white btn-success" @click="getAlumnos()" ><i class="fas fa-list"></i></button></div>
                         <div class="col-1"><button class="btn text-white btn-primary" @click="graficagenero()" ><i class="fas fa-chart-pie"></i></button></div>
-
                     </div>
                     <div class="row"><div class="col-10 text-center">@{{ gen }}</div></div>
                 </div>
@@ -76,12 +75,18 @@
                         <div class="row pl-4">
                             <div class="col-12 pt-4">
                                 <div class="nav  nav-tabs" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                    <a class="nav-link active" id="v-pills-general-tab" data-toggle="pill" href="#v-pills-general" role="tab" aria-controls="v-pills-general" aria-selected="true">Datos Generales</a>
-                                    <a class="nav-link" id="v-pills-antecedentes-tab" data-toggle="pill" href="#v-pills-antecedentes" role="tab" aria-controls="v-pills-antecedentes" aria-selected="false">Antecedentes Acádemicos</a>
-                                    <a class="nav-link" id="v-pills-familiares-tab" data-toggle="pill" href="#v-pills-familiares" role="tab" aria-controls="v-pills-familiares" aria-selected="false">Datos Familiares</a>
-                                    <a class="nav-link" id="v-pills-habitos-tab" data-toggle="pill" href="#v-pills-habitos" role="tab" aria-controls="v-pills-habitos" aria-selected="false">Hábitos de Estudio</a>
-                                    <a class="nav-link" id="v-pills-formacion-tab" data-toggle="pill" href="#v-pills-formacion" role="tab" aria-controls="v-pills-formacion" aria-selected="false">Formación Integral/Salud</a>
-                                    <a class="nav-link" id="v-pills-area-tab" data-toggle="pill" href="#v-pills-area" role="tab" aria-controls="v-pills-area" aria-selected="false">Área Psicopedagógica</a>
+                                    <a class="nav-link active" id="v-pills-general-tab" data-toggle="pill"
+                                       href="#v-pills-general" role="tab" aria-controls="v-pills-general" aria-selected="true">Datos Generales</a>
+                                    <a class="nav-link" id="v-pills-antecedentes-tab" data-toggle="pill"
+                                       href="#v-pills-antecedentes" role="tab" aria-controls="v-pills-antecedentes" aria-selected="false">Antecedentes Acádemicos</a>
+                                    <a class="nav-link" id="v-pills-familiares-tab" data-toggle="pill"
+                                       href="#v-pills-familiares" role="tab" aria-controls="v-pills-familiares" aria-selected="false">Datos Familiares</a>
+                                    <a class="nav-link" id="v-pills-habitos-tab" data-toggle="pill"
+                                       href="#v-pills-habitos" role="tab" aria-controls="v-pills-habitos" aria-selected="false">Hábitos de Estudio</a>
+                                    <a class="nav-link" id="v-pills-formacion-tab" data-toggle="pill"
+                                       href="#v-pills-formacion" role="tab" aria-controls="v-pills-formacion" aria-selected="false">Formación Integral/Salud</a>
+                                    <a class="nav-link" id="v-pills-area-tab" data-toggle="pill"
+                                       href="#v-pills-area" role="tab" aria-controls="v-pills-area" aria-selected="false">Área Psicopedagógica</a>
                                 </div>
                             </div>
                         </div>
