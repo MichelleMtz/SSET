@@ -32,7 +32,7 @@ class TutorExpedienteController extends Controller
         $dato=[$carreras,$grupos,$periodos,$datos];
 
 
-        return redirect('vista');
+        return view('alumnos.update');
 
 
     }

@@ -72,8 +72,8 @@
                                         <label for="sexo">Sexo</label>
                                         <select name="sexo" id="sexo"  class="custom-select custom-select-md">
                                             <option value="" selected>Elija un Sexo</option>
-                                            <option value="1">M</option>
-                                            <option value="2">F</option>
+                                            <option value="M">Masculino</option>
+                                            <option value="F">Femenino</option>
                                         </select>
                                     </div>
                                 </div>
@@ -193,7 +193,7 @@
                                     <div class="col-md-6">
                                         <label for="estado">Estado</label>
                                         <select id="estado" name="estado" class="custom-select custom-select-md">
-                                            <option value="" selected>Elija Turno</option>
+                                            <option value="" selected>Elija estado académico</option>
                                             <option value="1">Regular</option>
                                             <option value="2">Inrregular</option>
                                         </select>
@@ -283,7 +283,7 @@
                                     <div class="col-md-6">
                                         <label for="SC">Semestres Cursados</label>
                                         <select name="semestre_cursado" id="SC" class="custom-select custom-select-md">
-                                            <option value="" selected>Elija una Opción</option>
+                                            <option value="null" selected>Elija una Opción</option>
                                             <option value="1">1</option>
                                             <option value="2">2</option>
                                             <option value="3">3</option>

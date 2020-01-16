@@ -14,6 +14,7 @@ class PdfController extends Controller
 {
     public function pdf_all()
     {
+
         $datosGenerales=DB::select('SELECT * FROM exp_generales WHERE id_alumno='.Session::get('id_alumno').';');
         //dd($datosGenerales[0]->nombre);
         $datosAntecedentes=DB::select('SELECT * FROM exp_antecedentes_academicos WHERE id_alumno='.Session::get('id_alumno').';');
@@ -942,12 +943,6 @@ class PdfController extends Controller
         $pdf->Output();
         exit();
     }
-
-
-
-
-
-
 
     public function pdf_lista(Request $request)
     {
