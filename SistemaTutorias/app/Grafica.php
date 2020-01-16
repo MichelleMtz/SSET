@@ -23,6 +23,7 @@ class Grafica extends Model
             FROM exp_generales,opc_nivel_socio where
             exp_generales.id_nivel_economico=opc_nivel_socio.id_opc_nivel_socio and exp_generales.id_carrera='.$carrera[0]->id_carrera.'
             and exp_generales.id_tutor='.Auth::user()->id.' group by exp_generales.id_nivel_economico;');
+
             $trabaja=DB::select('SELECT count(exp_generales.trabaja) y, CASE exp_generales.trabaja WHEN 1 THEN "Si" WHEN 2 THEN "No" END name FROM exp_generales
             where exp_generales.id_carrera='.$carrera[0]->id_carrera.' and exp_generales.id_tutor='.Auth::user()->id.' group by exp_generales.trabaja;');
             $beca=DB::select('SELECT count(exp_generales.beca) y, CASE exp_generales.beca WHEN 1 THEN "Si" WHEN 2 THEN "No" END name FROM exp_generales

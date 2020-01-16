@@ -94,7 +94,13 @@ Route::get('/vista', function () {
 Route::group(['prefix'=>'graphics'],function (){
     Route::get('/', 'GraficasController@index');
     Route::post('genero', 'GraficasController@genero');
-    Route::post('estadocivil', 'GraficasController@estadocivil');
+    Route::post('academico', 'GraficasController@academico');
+    Route::post('generales', 'GraficasController@generales');
+    Route::post('familiares', 'GraficasController@familiares');
+    Route::post('habitos', 'GraficasController@habitos');
+    Route::post('salud', 'GraficasController@salud');
+    Route::post('area', 'GraficasController@area');
+
 
 });
 

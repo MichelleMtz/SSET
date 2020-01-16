@@ -93,21 +93,79 @@
                                             <div class="col-12">
                                                 <div class="row">
                                                     <div class="col-4 graf" id="estadoc"></div>
+                                                    <div class="col-4 graf" id="ne"></div>
+                                                    <div class="col-4 graf" id="tra"></div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4 graf" id="bec"></div>
+                                                    <div class="col-4 graf" id="est"></div>
                                                 </div>
                                             </div>
 
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="v-pills-antecedentes" role="tabpanel" aria-labelledby="v-pills-antecedentes-tab">
-
+                                        <div class="row pt-4">
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <div class="col-4 graf" id="bach">Hola</div>
+                                                    <div class="col-4 graf" id="otraca"></div>
+                                                    <div class="col-4 graf" id="gusta"></div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4 graf" id="estimula"></div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="tab-pane fade" id="v-pills-familiares" role="tabpanel" aria-labelledby="v-pills-familiares-tab">
+                                        <div class="row pt-4">
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <div class="col-4 graf" id="vive"></div>
+                                                    <div class="col-4 graf" id="etnia"></div>
+                                                    <div class="col-4 graf" id="lengua"></div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="tab-pane fade" id="v-pills-habitos" role="tabpanel" aria-labelledby="v-pills-habitos-tab">
+                                        <div class="row pt-4">
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <div class="col-4 graf" id="intelectual"></div>
+                                                    <div class="col-4 graf" id="tiempo"></div>
+                                                    <div class="col-4 graf" id=""></div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="tab-pane fade" id="v-pills-formacion" role="tabpanel" aria-labelledby="v-pills-formacion-tab">
+                                        <div class="row pt-4">
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <div class="col-4 graf" id="enfermedadc"></div>
+                                                    <div class="col-4 graf" id="enfermedadv"></div>
+                                                    <div class="col-4 graf" id="lentes"></div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="tab-pane fade" id="v-pills-area" role="tabpanel" aria-labelledby="v-pills-area-tab">
+                                        <div class="row pt-4">
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <div class="col-4 graf" id="rendimiento"></div>
+                                                    <div class="col-4 graf" id="computo"></div>
+                                                    <div class="col-4 graf" id="comprension"></div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4 graf" id="preparacion"></div>
+                                                    <div class="col-4 graf" id="concentracion"></div>
+                                                    <div class="col-4 graf" id="trabajo"></div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -118,6 +176,28 @@
         </div>
     </div>
 
+    <div class="modal" id="modal_editar" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>
+
+                        @{{ content_modal }}
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <script>
     new Vue({
@@ -134,13 +214,23 @@
             grup:"/grupos",
             act:'/UpdateA',
             cambios:'/cambio',
-            estadociv:'graphics/estadocivil',
+            academico:'graphics/academico',
             rutgen:"/graphics/genero",
+            generales:"/graphics/generales",
+            familiares:"/graphics/familiares",
+            habitos:"/graphics/habitos",
+            salud:"/graphics/salud",
+            area:"/graphics/area",
             pd:"pdf/lista",
             datos:[],
             grupos:[],
             alumnog:[],
-            ec:[],
+            eg:[],
+            ea:[],
+            ef:[],
+            eh:[],
+            es:[],
+            eas:[],
             vista:[],
             lista:false,
             menugrupos:true,
@@ -150,6 +240,7 @@
             gen:"",
             idca:null,
             idasigna:null,
+            content_modal:"",
         },
         methods:{
             getTut:function(){
@@ -226,8 +317,153 @@
                         }]
                     });
                 }).catch(error=>{ });
-                axios.post(this.estadociv,{id_carrera:this.idca}).then(response=>{
-                    this.ec=response.data;
+
+                axios.post(this.generales,{id_carrera:this.idca}).then(response=>{
+                    this.eg=response.data;
+                    Highcharts.chart('ne', {
+                        chart: {
+                            type: 'column'
+                        },
+                        title: {
+                            text: 'Nivel económico'
+                        },
+                        xAxis: {
+                            categories:this.eg.categoria,
+                            crosshair: true
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: 'Total'
+                            }
+                        },
+                        tooltip: {
+                            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                            footerFormat: '</table>',
+                            shared: true,
+                            useHTML: true
+                        },
+                        plotOptions: {
+                            column: {
+                                pointPadding: 0.2,
+                                borderWidth: 0
+                            }
+                        },
+                        series: [{
+                            name: 'Nivel económico',
+                            data: this.eg.cantidad,
+                        }]
+                    });
+                    Highcharts.chart('tra', {
+                        chart: {
+                            type: 'column'
+                        },
+                        title: {
+                            text: 'Trabaja'
+                        },
+                        xAxis: {
+                            categories:this.eg.cattrabaja,
+                            crosshair: true
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: 'Total'
+                            }
+                        },
+                        tooltip: {
+                            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                            footerFormat: '</table>',
+                            shared: true,
+                            useHTML: true
+                        },
+                        plotOptions: {
+                            column: {
+                                pointPadding: 0.2,
+                                borderWidth: 0
+                            }
+                        },
+                        series: [{
+                            name: 'Trabaja',
+                            data: this.eg.canttrabaja,
+                        }]
+                    });
+                    Highcharts.chart('bec', {
+                        chart: {
+                            type: 'column'
+                        },
+                        title: {
+                            text: 'Beca'
+                        },
+                        xAxis: {
+                            categories:this.eg.catbeca,
+                            crosshair: true
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: 'Total'
+                            }
+                        },
+                        tooltip: {
+                            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                            footerFormat: '</table>',
+                            shared: true,
+                            useHTML: true
+                        },
+                        plotOptions: {
+                            column: {
+                                pointPadding: 0.2,
+                                borderWidth: 0
+                            }
+                        },
+                        series: [{
+                            name: 'Beca',
+                            data: this.eg.cantbeca,
+                        }]
+                    });
+                    Highcharts.chart('est', {
+                        chart: {
+                            type: 'column'
+                        },
+                        title: {
+                            text: 'Situación académica'
+                        },
+                        xAxis: {
+                            categories:this.eg.catestado,
+                            crosshair: true
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: 'Total'
+                            }
+                        },
+                        tooltip: {
+                            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                            footerFormat: '</table>',
+                            shared: true,
+                            useHTML: true
+                        },
+                        plotOptions: {
+                            column: {
+                                pointPadding: 0.2,
+                                borderWidth: 0
+                            }
+                        },
+                        series: [{
+                            name: 'Estado',
+                            data: this.eg.cantestado,
+                        }]
+                    });
                     Highcharts.chart('estadoc', {
                         chart: {
                             type: 'column'
@@ -236,7 +472,7 @@
                             text: 'Estado civil'
                         },
                         xAxis: {
-                            categories:this.ec.nombre,
+                            categories:this.eg.catcivil,
                             crosshair: true
                         },
                         yAxis: {
@@ -261,10 +497,833 @@
                         },
                         series: [{
                             name: 'Estado civil',
-                            data: this.ec.cantidad,
+                            data: this.eg.cantcivil,
+                        }]
+                    });
+
+                }).catch(error=>{ });
+                axios.post(this.academico,{id_carrera:this.idca}).then(response=>{
+                    this.ea=response.data;
+                    Highcharts.chart('bach', {
+                        chart: {
+                            type: 'column'
+                        },
+                        title: {
+                            text: 'Bachillerato'
+                        },
+                        xAxis: {
+                            categories:this.ea.catbachillerato,
+                            crosshair: true
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: 'Total'
+                            }
+                        },
+                        tooltip: {
+                            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                            footerFormat: '</table>',
+                            shared: true,
+                            useHTML: true
+                        },
+                        plotOptions: {
+                            column: {
+                                pointPadding: 0.2,
+                                borderWidth: 0
+                            }
+                        },
+                        series: [{
+                            name: 'Tipo de bachillerato',
+                            data: this.ea.cantbachillerato,
+                        }]
+                    });
+                    Highcharts.chart('otraca', {
+                        chart: {
+                            type: 'column'
+                        },
+                        title: {
+                            text: 'Otra carrera iniciada'
+                        },
+                        xAxis: {
+                            categories:this.ea.catotra,
+                            crosshair: true
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: 'Total'
+                            }
+                        },
+                        tooltip: {
+                            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                            footerFormat: '</table>',
+                            shared: true,
+                            useHTML: true
+                        },
+                        plotOptions: {
+                            column: {
+                                pointPadding: 0.2,
+                                borderWidth: 0
+                            }
+                        },
+                        series: [{
+                            name: 'Carrera iniciada',
+                            data: this.ea.cantotra,
+                        }]
+                    });
+                    Highcharts.chart('gusta', {
+                        chart: {
+                            type: 'column'
+                        },
+                        title: {
+                            text: 'Gusto por la carrera'
+                        },
+                        xAxis: {
+                            categories:this.ea.catgusta,
+                            crosshair: true
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: 'Total'
+                            }
+                        },
+                        tooltip: {
+                            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                            footerFormat: '</table>',
+                            shared: true,
+                            useHTML: true
+                        },
+                        plotOptions: {
+                            column: {
+                                pointPadding: 0.2,
+                                borderWidth: 0
+                            }
+                        },
+                        series: [{
+                            name: 'Gusto por la carrera',
+                            data: this.ea.cantgusta,
+                        }]
+                    });
+                    Highcharts.chart('estimula', {
+                        chart: {
+                            type: 'column'
+                        },
+                        title: {
+                            text: 'Estimula la familia'
+                        },
+                        xAxis: {
+                            categories:this.ea.catestimula,
+                            crosshair: true
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: 'Total'
+                            }
+                        },
+                        tooltip: {
+                            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                            footerFormat: '</table>',
+                            shared: true,
+                            useHTML: true
+                        },
+                        plotOptions: {
+                            column: {
+                                pointPadding: 0.2,
+                                borderWidth: 0
+                            }
+                        },
+                        series: [{
+                            name: 'Estimula',
+                            data: this.ea.cantestimula,
+                        }]
+                    });
+
+                }).catch(error=>{ });
+                axios.post(this.academico,{id_carrera:this.idca}).then(response=>{
+                    this.ea=response.data;
+                    Highcharts.chart('bach', {
+                        chart: {
+                            type: 'column'
+                        },
+                        title: {
+                            text: 'Bachillerato'
+                        },
+                        xAxis: {
+                            categories:this.ea.catbachillerato,
+                            crosshair: true
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: 'Total'
+                            }
+                        },
+                        tooltip: {
+                            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                            footerFormat: '</table>',
+                            shared: true,
+                            useHTML: true
+                        },
+                        plotOptions: {
+                            column: {
+                                pointPadding: 0.2,
+                                borderWidth: 0
+                            }
+                        },
+                        series: [{
+                            name: 'Tipo de bachillerato',
+                            data: this.ea.cantbachillerato,
+                        }]
+                    });
+                    Highcharts.chart('otraca', {
+                        chart: {
+                            type: 'column'
+                        },
+                        title: {
+                            text: 'Otra carrera iniciada'
+                        },
+                        xAxis: {
+                            categories:this.ea.catotra,
+                            crosshair: true
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: 'Total'
+                            }
+                        },
+                        tooltip: {
+                            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                            footerFormat: '</table>',
+                            shared: true,
+                            useHTML: true
+                        },
+                        plotOptions: {
+                            column: {
+                                pointPadding: 0.2,
+                                borderWidth: 0
+                            }
+                        },
+                        series: [{
+                            name: 'Carrera iniciada',
+                            data: this.ea.cantotra,
+                        }]
+                    });
+                    Highcharts.chart('gusta', {
+                        chart: {
+                            type: 'column'
+                        },
+                        title: {
+                            text: 'Gusto por la carrera'
+                        },
+                        xAxis: {
+                            categories:this.ea.catgusta,
+                            crosshair: true
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: 'Total'
+                            }
+                        },
+                        tooltip: {
+                            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                            footerFormat: '</table>',
+                            shared: true,
+                            useHTML: true
+                        },
+                        plotOptions: {
+                            column: {
+                                pointPadding: 0.2,
+                                borderWidth: 0
+                            }
+                        },
+                        series: [{
+                            name: 'Gusto por la carrera',
+                            data: this.ea.cantgusta,
+                        }]
+                    });
+                    Highcharts.chart('estimula', {
+                        chart: {
+                            type: 'column'
+                        },
+                        title: {
+                            text: 'Estimula la familia'
+                        },
+                        xAxis: {
+                            categories:this.ea.catestimula,
+                            crosshair: true
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: 'Total'
+                            }
+                        },
+                        tooltip: {
+                            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                            footerFormat: '</table>',
+                            shared: true,
+                            useHTML: true
+                        },
+                        plotOptions: {
+                            column: {
+                                pointPadding: 0.2,
+                                borderWidth: 0
+                            }
+                        },
+                        series: [{
+                            name: 'Estimula',
+                            data: this.ea.cantestimula,
+                        }]
+                    });
+
+                }).catch(error=>{ });
+                axios.post(this.familiares,{id_carrera:this.idca,id_asigna_generacion:this.idasigna}).then(response=>{
+                    this.ef=response.data;
+                    Highcharts.chart('vive', {
+                        chart: {
+                            type: 'column'
+                        },
+                        title: {
+                            text: 'Actualmente viven con'
+                        },
+                        xAxis: {
+                            categories:this.ef.catvive,
+                            crosshair: true
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: 'Total'
+                            }
+                        },
+                        tooltip: {
+                            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                            footerFormat: '</table>',
+                            shared: true,
+                            useHTML: true
+                        },
+                        plotOptions: {
+                            column: {
+                                pointPadding: 0.2,
+                                borderWidth: 0
+                            }
+                        },
+                        series: [{
+                            name: 'Vive',
+                            data: this.ef.cantvive,
+                        }]
+                    });
+                    Highcharts.chart('etnia', {
+                        chart: {
+                            type: 'column'
+                        },
+                        title: {
+                            text: 'Pertenece a etnia indígena'
+                        },
+                        xAxis: {
+                            categories:this.ef.catetnia,
+                            crosshair: true
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: 'Total'
+                            }
+                        },
+                        tooltip: {
+                            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                            footerFormat: '</table>',
+                            shared: true,
+                            useHTML: true
+                        },
+                        plotOptions: {
+                            column: {
+                                pointPadding: 0.2,
+                                borderWidth: 0
+                            }
+                        },
+                        series: [{
+                            name: 'Etnia',
+                            data: this.ef.cantetnia,
+                        }]
+                    });
+                    Highcharts.chart('lengua', {
+                        chart: {
+                            type: 'column'
+                        },
+                        title: {
+                            text: 'Hablan lengua indígena'
+                        },
+                        xAxis: {
+                            categories:this.ef.catlengua,
+                            crosshair: true
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: 'Total'
+                            }
+                        },
+                        tooltip: {
+                            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                            footerFormat: '</table>',
+                            shared: true,
+                            useHTML: true
+                        },
+                        plotOptions: {
+                            column: {
+                                pointPadding: 0.2,
+                                borderWidth: 0
+                            }
+                        },
+                        series: [{
+                            name: 'Lengua indígena',
+                            data: this.ef.cantlengua,
                         }]
                     });
                 }).catch(error=>{ });
+
+                axios.post(this.habitos,{id_carrera:this.idca,id_asigna_generacion:this.idasigna}).then(response=>{
+                    this.eh=response.data;
+                    Highcharts.chart('intelectual', {
+                        chart: {
+                            type: 'column'
+                        },
+                        title: {
+                            text: 'Forma de trabajo intelectual'
+                        },
+                        xAxis: {
+                            categories:this.eh.catintelectual,
+                            crosshair: true
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: 'Total'
+                            }
+                        },
+                        tooltip: {
+                            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                            footerFormat: '</table>',
+                            shared: true,
+                            useHTML: true
+                        },
+                        plotOptions: {
+                            column: {
+                                pointPadding: 0.2,
+                                borderWidth: 0
+                            }
+                        },
+                        series: [{
+                            name: 'Forma',
+                            data: this.eh.cantintelectual,
+                        }]
+                    });
+                    Highcharts.chart('tiempo', {
+                        chart: {
+                            type: 'column'
+                        },
+                        title: {
+                            text: 'Tiempo dedicado a estudiar'
+                        },
+                        xAxis: {
+                            categories:this.eh.cattiempo,
+                            crosshair: true
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: 'Total'
+                            }
+                        },
+                        tooltip: {
+                            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                            footerFormat: '</table>',
+                            shared: true,
+                            useHTML: true
+                        },
+                        plotOptions: {
+                            column: {
+                                pointPadding: 0.2,
+                                borderWidth: 0
+                            }
+                        },
+                        series: [{
+                            name: 'Tiempo',
+                            data: this.eh.canttiempo,
+                        }]
+                    });
+
+                }).catch(error=>{ });
+                axios.post(this.salud,{id_carrera:this.idca,id_asigna_generacion:this.idasigna}).then(response=>{
+                    this.es=response.data;
+                    Highcharts.chart('enfermedadc', {
+                        chart: {
+                            type: 'column'
+                        },
+                        title: {
+                            text: 'Enfermedad Crónica'
+                        },
+                        xAxis: {
+                            categories:this.es.catenfermedadc,
+                            crosshair: true
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: 'Total'
+                            }
+                        },
+                        tooltip: {
+                            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                            footerFormat: '</table>',
+                            shared: true,
+                            useHTML: true
+                        },
+                        plotOptions: {
+                            column: {
+                                pointPadding: 0.2,
+                                borderWidth: 0
+                            }
+                        },
+                        series: [{
+                            name: 'Enfermedad Crónica',
+                            data: this.es.cantenfermedadc,
+                        }]
+                    });
+                    Highcharts.chart('enfermedadv', {
+                        chart: {
+                            type: 'column'
+                        },
+                        title: {
+                            text: 'Enfermedad Visual'
+                        },
+                        xAxis: {
+                            categories:this.es.catenfermedadv,
+                            crosshair: true
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: 'Total'
+                            }
+                        },
+                        tooltip: {
+                            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                            footerFormat: '</table>',
+                            shared: true,
+                            useHTML: true
+                        },
+                        plotOptions: {
+                            column: {
+                                pointPadding: 0.2,
+                                borderWidth: 0
+                            }
+                        },
+                        series: [{
+                            name: 'Enfermedad Visual',
+                            data: this.es.cantenfermedadv,
+                        }]
+                    });
+                    Highcharts.chart('lentes', {
+                        chart: {
+                            type: 'column'
+                        },
+                        title: {
+                            text: 'Uso de lentes'
+                        },
+                        xAxis: {
+                            categories:this.es.catlentes,
+                            crosshair: true
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: 'Total'
+                            }
+                        },
+                        tooltip: {
+                            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                            footerFormat: '</table>',
+                            shared: true,
+                            useHTML: true
+                        },
+                        plotOptions: {
+                            column: {
+                                pointPadding: 0.2,
+                                borderWidth: 0
+                            }
+                        },
+                        series: [{
+                            name: 'Uso de lentes',
+                            data: this.es.cantlentes,
+                        }]
+                    });
+
+                }).catch(error=>{ });
+                axios.post(this.area,{id_carrera:this.idca,id_asigna_generacion:this.idasigna}).then(response=>{
+                    this.eas=response.data;
+                    Highcharts.chart('rendimiento', {
+                        chart: {
+                            type: 'column'
+                        },
+                        title: {
+                            text: 'Rendimiento escolar'
+                        },
+                        xAxis: {
+                            categories:this.eas.catrendimiento,
+                            crosshair: true
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: 'Total'
+                            }
+                        },
+                        tooltip: {
+                            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                            footerFormat: '</table>',
+                            shared: true,
+                            useHTML: true
+                        },
+                        plotOptions: {
+                            column: {
+                                pointPadding: 0.2,
+                                borderWidth: 0
+                            }
+                        },
+                        series: [{
+                            name: 'Rendimiento escolar',
+                            data: this.eas.cantrendimiento,
+                        }]
+                    });
+                    Highcharts.chart('computo', {
+                        chart: {
+                            type: 'column'
+                        },
+                        title: {
+                            text: 'Conocimientos en cómputo'
+                        },
+                        xAxis: {
+                            categories:this.eas.catcomputo,
+                            crosshair: true
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: 'Total'
+                            }
+                        },
+                        tooltip: {
+                            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                            footerFormat: '</table>',
+                            shared: true,
+                            useHTML: true
+                        },
+                        plotOptions: {
+                            column: {
+                                pointPadding: 0.2,
+                                borderWidth: 0
+                            }
+                        },
+                        series: [{
+                            name: 'Conocimientos en cómputo',
+                            data: this.eas.cantcomputo,
+                        }]
+                    });
+                    Highcharts.chart('comprension', {
+                        chart: {
+                            type: 'column'
+                        },
+                        title: {
+                            text: 'Comprensión y retención en clase'
+                        },
+                        xAxis: {
+                            categories:this.eas.catcomprension,
+                            crosshair: true
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: 'Total'
+                            }
+                        },
+                        tooltip: {
+                            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                            footerFormat: '</table>',
+                            shared: true,
+                            useHTML: true
+                        },
+                        plotOptions: {
+                            column: {
+                                pointPadding: 0.2,
+                                borderWidth: 0
+                            }
+                        },
+                        series: [{
+                            name: 'Comprensión',
+                            data: this.eas.cantcomprension,
+                        }]
+                    });
+                    Highcharts.chart('preparacion', {
+                        chart: {
+                            type: 'column'
+                        },
+                        title: {
+                            text: 'Preparación y presentación de exámenes'
+                        },
+                        xAxis: {
+                            categories:this.eas.catpreparacion,
+                            crosshair: true
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: 'Total'
+                            }
+                        },
+                        tooltip: {
+                            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                            footerFormat: '</table>',
+                            shared: true,
+                            useHTML: true
+                        },
+                        plotOptions: {
+                            column: {
+                                pointPadding: 0.2,
+                                borderWidth: 0
+                            }
+                        },
+                        series: [{
+                            name: 'Preparación',
+                            data: this.eas.cantpreparacion,
+                        }]
+                    });
+                    Highcharts.chart('concentracion', {
+                        chart: {
+                            type: 'column'
+                        },
+                        title: {
+                            text: 'Concentración durante el estudio'
+                        },
+                        xAxis: {
+                            categories:this.eas.catconcentracion,
+                            crosshair: true
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: 'Total'
+                            }
+                        },
+                        tooltip: {
+                            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                            footerFormat: '</table>',
+                            shared: true,
+                            useHTML: true
+                        },
+                        plotOptions: {
+                            column: {
+                                pointPadding: 0.2,
+                                borderWidth: 0
+                            }
+                        },
+                        series: [{
+                            name: 'Concentración',
+                            data: this.eas.cantconcentracion,
+                        }]
+                    });
+                    Highcharts.chart('trabajo', {
+                        chart: {
+                            type: 'column'
+                        },
+                        title: {
+                            text: 'Trabajo en equipo'
+                        },
+                        xAxis: {
+                            categories:this.eas.cattrabajo,
+                            crosshair: true
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: 'Total'
+                            }
+                        },
+                        tooltip: {
+                            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                            footerFormat: '</table>',
+                            shared: true,
+                            useHTML: true
+                        },
+                        plotOptions: {
+                            column: {
+                                pointPadding: 0.2,
+                                borderWidth: 0
+                            }
+                        },
+                        series: [{
+                            name: 'Trabajo en equipo',
+                            data: this.eas.canttrabajo,
+                        }]
+                    });
+
+                }).catch(error=>{ });
+
+
+            },
+            grafacademico:function()
+            {
+                alert('académico');
             },
             cambio:function (alumno,num) {
                 axios.post(this.cambios,{id_asigna_alumno:alumno.id_asigna_alumno,estado:num}).then(response=>{
@@ -273,6 +1332,8 @@
             },
             ver:function (alumno) {
                 axios.post(this.act,{id_alumno:alumno.id_alumno}).then(response=>{
+                        this.content_modal=response
+                    $("modal_editar").modal("show")
 
                 });
             },
