@@ -54,8 +54,7 @@ class ViewAlumnosController extends Controller
         //
         //dd($request->request);
         AsignaExpediente::insert($request);
-        return 'alumnos.index';
-
+        return 'panel';
     }
     public function updateExp(Request $request)
     {
